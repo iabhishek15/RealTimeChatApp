@@ -55,9 +55,10 @@ function chatting(server) {
         socket.emit('FriendExists', true);
       });
     });
-
+    //Receving the user to send the friend request
     socket.on('friendRequest', (user) => {
-      //console.log(user.friend, user.me);
+      //saving the friend request in the database
+      add_friend_request_to_database(User, user.me, user.friend);
       socket.broadcast.emit('AddFriendRequest', {
         "receiver" : user.friend,
         "sender" : user.me
@@ -65,7 +66,6 @@ function chatting(server) {
     });
 
     socket.on('AddFriend', (user) => {
-      //console.log(user.user1, user.user2);
       AddFriend(User, user.user1,user.user2);
       AddFriend(User, user.user2,user.user1);
     });
@@ -126,6 +126,7 @@ function AddFriend(User, user1, user2) {
   });
 }
 
+//creating the message  
 function createMessage(Message, message, personOne, personTwo) {
   const new_message = new Message;
   new_message.personOne = personOne;
@@ -138,7 +139,7 @@ function createMessage(Message, message, personOne, personTwo) {
   });
   new_message.save();
 }
-
+//updating the message
 function updateMessage(Message, id, texts) {
   Message.updateOne({
     _id : id
@@ -154,3 +155,32 @@ function updateMessage(Message, id, texts) {
     console.log(err);
   });
 }
+
+
+function add_friend_request_to_database(User, me, friend) {
+  User.findOne({
+    username : friend
+  }, function (err, user) {
+    if (err) {
+      console.log(err);
+      return ;
+    }
+    user.friend_request.push(me);
+    //console.log(user.friends);
+    User.updateOne({
+      _id : user._id
+    }, { 
+      $set : { 
+        friends : user.friend_request 
+      }
+    }, {
+      "upsert": false
+    }).then((result) => {
+      console.log(result);
+    }).catch((err) => {
+      console.log(err);
+    });
+  });
+}
+
+

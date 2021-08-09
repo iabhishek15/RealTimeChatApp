@@ -7,6 +7,8 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel = 'stylesheet' href = 'stylesheets/chat.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -80,10 +82,16 @@
           <span class="heading-online">Online</span>
         </div>
         <div class="col-sm-1 col-xs-1  heading-dot pull-right">
-          <i class="fa fa-sign-out fa-2x  pull-right" id = 'signout' aria-hidden="true"></i>
+          <form action = '/logout?_method=DELETE' method = 'POST'>
+            <button type = 'submit' class = 'btn'>
+              <i class="fa fa-sign-out fa-2x  pull-right" id = 'signout' aria-hidden="true"></i>
+            </button>
+          </form>
+          
         </div>
-        <div class="col-sm-1 col-xs-1  heading-dot pull-right" id = 'notification'>
-          <i class="fa fa-bell fa-2x  pull-right " aria-hidden="true"></i>
+
+        <div class="col-sm-1 col-xs-1  heading-dot pull-right" data-toggle="modal" data-target="#FriendRequest"  id = 'notification'>
+          <i class = "fa fa-bell fa-2x  pull-right " aria-hidden="true"></i>
           <span class="badge">3</span>
         </div>
       </div>
@@ -154,7 +162,63 @@
   </div>
 </div>
 
+
+<div class="modal fade" id="FriendRequest" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" tabindex="1">
+        <h3>Friend Request Pending !!</h3>
+        <div class="container bootstrap snippets bootdey" id = "friendList">
+        <div class="jumbotron list-content">
+          <ul class="list-group">
+            <li href="#" class="list-group-item text-left" class="ul_list">
+              <img class="img-thumbnail" src="https://bootdey.com/img/Content/User_for_snippets.png">
+              <label class="name">
+                  Juan guillermo cuadrado<br>
+              </label>
+              <label class="pull-right">
+                  <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
+                  <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
+              </label>
+              <div class="break"></div>
+            </li>
+          </ul>
+        </div>
+        </div>
+      </div>              
+    </div>
+  </div>
+</div>
+
+
 <style>
+.list-content{
+ min-height:100px;
+}
+#friendList{
+  width:100%;
+  height:80%;
+  background-color: white;
+}
+.list-group-item img {
+    height:80px; 
+    width:80px;
+}
+
+.jumbotron .btn {
+    padding: 5px 5px !important;
+    font-size: 12px !important;
+}
+.prj-name {
+    color:#5bc0de;    
+}
+.break{
+    width:100%;
+    margin:20px;
+}
+.name {
+    color:#5bc0de;    
+}
   #checking {
     background-color:red;
   }
@@ -168,6 +232,9 @@
   }
   #myModal, #imageModel{
     height:50%;
+  }
+  #FriendRequest {
+    height: 80%;
   }
   .modal-body {
     visibility: visible;
@@ -183,6 +250,10 @@
   width: 40%;
   color: white;
 }
+
+.ul_list{
+  height:40%;
+}
 </style>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -190,3 +261,6 @@
 <script src = 'javascripts/chatting.js'></script>
 </body>
 </html>
+
+
+

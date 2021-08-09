@@ -7,7 +7,8 @@ mongoose.model('User', new mongoose.Schema({
     type : String,
     default : "uploads\\white.jpg" 
   },
-  friends : []
+  friends : [],
+  friend_request : []
 }), 'users');
 
 mongoose.model('Message', new mongoose.Schema({

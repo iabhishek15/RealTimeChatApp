@@ -10,6 +10,7 @@ let username = document.getElementById('username').innerHTML;
 let currentTalk = document.getElementById('currentTalk');
 
 
+//sending message
 sendMessage.addEventListener('click', function (e) {
   if (currentTalk.innerText.length == 0) return ;
   const messageInput = document.getElementById('messageInput');
@@ -32,26 +33,19 @@ socket.on('otherMessage', function (message) {
   conversation.scrollTop = conversation.scrollHeight;
 });
 
-
-signout.addEventListener('click', function () {
-  //console.log('signing out');
-});
-
+//Searching friend on the key press
 searchFriend.addEventListener("keydown", function (e) {
   showSearch.innerHTML = '';
   if (!e) e = window.event;
   var keyCode = e.code || e.key;
-  //console.log(keyCode);
   if (keyCode == 'Enter'){
     socket.emit('searchFriend', searchFriend.value);
   }
-  //when using keydown make sure to use the different div for storing the result 
-  //do not append the result in the same div
 });
 
 
-socket.on('FriendExists', exits => {
-  //console.log(exits);
+//checking if the friend exits or not
+socket.on('FriendExists', exits => { 
   if (exits) {
     showSearch.innerHTML = `
     <p>the username does exits<p>
@@ -61,9 +55,12 @@ socket.on('FriendExists', exits => {
   }
 });
 
-
+//adding friend
 function addFriend() {
-  //console.log(username.trim(), searchFriend.value.trim());
+  //this make no changes
+  let friendRequest = document.getElementById('friendRequest');
+  friendRequest.value  = "Request Sent";
+  
   socket.emit('friendRequest', ({ 
     "me" : username.trim(),
     "friend" : searchFriend.value.trim()
@@ -71,12 +68,8 @@ function addFriend() {
 }
 
 socket.on('AddFriendRequest', user => {
- //console.log(user.sender, user.receiver);
- //console.log(user.receiver, username);
- //console.log('Is the request getting send');
- //console.log(username.trim, user.receiver);
- if(username.trim() == user.receiver) {
-    //console.log('Do you want to be friend with ${user.sender} ??');
+  console.log(username.trim(), user.receiver);
+  if(username.trim() == user.receiver) {
     if (confirm(`Do you want to be friend with ${user.sender} ??`)) {
       socket.emit('AddFriend', {
         user1 : user.sender,

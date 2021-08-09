@@ -26,6 +26,7 @@ const storage = multer.diskStorage({
 
 
 
+
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/chattingdb',{
   useNewUrlParser: true,
@@ -70,7 +71,7 @@ app.use('/uploads', express.static('uploads'));
 
 app.delete('/logout', function (req, res, next){ 
   req.logOut();
-  res.redirect('/login');
+  res.redirect('/');
 }); 
 
 
@@ -81,10 +82,26 @@ app.get('/', IsAuthenticated, function (req, res, next) {
       if (err) {
         return next(err);
       }
+      let userFriendRequest = [];
+      for (let i = 0; i < user.friend_request.length; ++i) {
+        User.findOne({
+          username : user.friend_request[i]
+        }, function (err, new_user) {
+          if (err) {
+            return next(err);
+          }
+          userFriendRequest.push({
+            user : user.friend_request[i],
+            user_image : new_user.image
+          })
+        });
+      }
+      console.log(userFriendRequest);
       return res.render('chat', {
         username : req.user.username,
         friends : user.friends,
         'profileImage' : user.image,
+        "userFriendRequest" : userFriendRequest
       });
   });
 });
