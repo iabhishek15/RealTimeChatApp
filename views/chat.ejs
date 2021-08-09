@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Whatsapp web chat template - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel = 'stylesheet' href = 'stylesheets/chat.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+<div class="container app">
+  <div class="row app-one">
+    <div class="col-sm-4 side">
+      <div class="side-one" id = 'users'>
+        <!-- <form action = '/logout?_method=DELETE' method = 'POST'>
+          <input type = 'submit' class = 'btn' value = 'logout'>
+        </form> -->
+        <div class="row heading">
+          <div class="col-sm-3 col-xs-3 heading-avatar" data-toggle="modal" data-target="#imageModel">
+            <div class="heading-avatar-icon">
+              <img src="<%= profileImage %>">
+            </div>
+          </div>
+          <div class="col-sm-4 col-xs-1" id = 'username'>
+            <%= username %>
+          </div>
+          <div class="col-sm-2 col-xs-1  heading-dot  pull-right" data-toggle="modal" data-target="#myModal">
+            <i class="fa fa-user-plus fa-2x  pull-right" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <div class="row searchBox">
+          <div class="col-sm-12 searchBox-inner">
+            <div class="form-group has-feedback">
+              <input id="searchText" type="text" class="form-control" name="searchText" placeholder="Search">
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+          </div>
+        </div>
+      
+      <div class="row sideBar">
+        <% friends.map((friend) => { %> 
+          <div class="row sideBar-body" onclick = "chatNow('<%= friend %>')">
+            <div class="col-sm-3 col-xs-3 sideBar-avatar">
+              <div class="avatar-icon">
+                <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+              </div>
+            </div>
+            <div class="col-sm-9 col-xs-9 sideBar-main">
+              <div class="row">
+                <div class="col-sm-8 col-xs-8 sideBar-name">
+                  <span class="name-meta"><%= friend %>
+                </span>
+                </div>
+                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
+                  <span class="time-meta pull-right">time
+                </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div> 
+    </div>
+
+    <div class="col-sm-8 conversation">
+      <div class="row heading">
+        <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
+          <div class="heading-avatar-icon">
+            <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+          </div>
+        </div>
+        <div class="col-sm-4 col-xs-7 heading-name">
+          <a class="heading-name-meta" id = 'currentTalk'>
+          </a>
+          <span class="heading-online">Online</span>
+        </div>
+        <div class="col-sm-1 col-xs-1  heading-dot pull-right">
+          <i class="fa fa-sign-out fa-2x  pull-right" id = 'signout' aria-hidden="true"></i>
+        </div>
+        <div class="col-sm-1 col-xs-1  heading-dot pull-right" id = 'notification'>
+          <i class="fa fa-bell fa-2x  pull-right " aria-hidden="true"></i>
+          <span class="badge">3</span>
+        </div>
+      </div>
+
+      <div class="row message" id="conversation">  
+      </div>
+
+      <div class="row reply">
+        <div class="col-sm-9 col-xs-9 reply-main" id = 'showTextDiv'>
+          <textarea class="form-control" id = 'messageInput' rows="1" id="comment"></textarea>
+        </div>
+        <div class="col-sm-1 col-xs-1  heading-dot" id = 'sendMessage'>
+          <i class="fa fa-send fa-2x" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" tabindex="1">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+        <div class="row searchBox">
+          <div class="col-sm-12 searchBox-inner">
+            <div class="form-group has-feedback">
+              <input type="text" class="form-control" name="searchText" placeholder="Search" id = 'searchFriend'>
+              <i class="glyphicon glyphicon-search form-control-feedback"></i>
+            </div>
+          </div>
+        </div>
+        <div class = 'container' id = 'showSearch'>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="imageModel" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" tabindex="1">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Image Upload</h4>
+        <div class = 'container'>
+          <form class = 'form-group' action="/upload-profile-pic" method="post" enctype="multipart/form-data">
+            <input class = 'form-group' type="file" accept="image/*" name="profile_pic" >
+            <input class = 'form-group' type="submit" value="upload">
+          </form>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #checking {
+    background-color:red;
+  }
+  #chatMessage {
+    outline: none;
+    box-shadow: none;
+  }
+  .btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: none!important; 
+  }
+  #myModal, #imageModel{
+    height:50%;
+  }
+  .modal-body {
+    visibility: visible;
+  }
+  .badge {
+  position: absolute;
+  top: 0px;
+  right: -1px;
+  padding: 1px 1px;
+  border-radius: 50%;
+  background-color: red;
+  height:40%;
+  width: 40%;
+  color: white;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src = "/socket.io/socket.io.js"></script>
+<script src = 'javascripts/chatting.js'></script>
+</body>
+</html>
