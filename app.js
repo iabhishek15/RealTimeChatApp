@@ -90,13 +90,14 @@ app.get('/', IsAuthenticated, function (req, res, next) {
           if (err) {
             return next(err);
           }
+          //console.log(user.friend_request[i], new_user.image);
           userFriendRequest.push({
             user : user.friend_request[i],
             user_image : new_user.image
           })
         });
       }
-      console.log(userFriendRequest);
+      //console.log(userFriendRequest);
       return res.render('chat', {
         username : req.user.username,
         friends : user.friends,
@@ -183,7 +184,7 @@ app.post('/signup', function (req, res, next) {
       passwordHash: bcrypt.hashSync(req.body.password, 10)
     });
     newUser.save();
-    res.redirect('/login');
+    return res.redirect('/');
   })
 });
 

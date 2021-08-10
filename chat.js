@@ -28,12 +28,14 @@ function chatting(server) {
           createMessage(Message, message, personOne, personTwo);
           return ;
         }
-        let texts = mess.text;
+        let texts = mess.text;  
+        let date = new Date();
+        let time = date.getDate() + "/" + date.getDay() + "/" + date.getFullYear()
         texts.push({
           sender : message.sender,
           receiver : message.receiver,
           text : message.text,
-          time : Date.now()
+          time : time
         });
         updateMessage(Message, mess._id, texts);
       });
@@ -131,11 +133,13 @@ function createMessage(Message, message, personOne, personTwo) {
   const new_message = new Message;
   new_message.personOne = personOne;
   new_message.personTwo = personTwo;
+  let date = new Date();
+  let time = date.getDate() + "/" + date.getDay() + "/" + date.getFullYear()
   new_message.text.push({
     sender : message.sender,
     receiver : message.receiver,
     text : message.text,
-    time : Date.now()
+    time : time
   });
   new_message.save();
 }
@@ -166,7 +170,7 @@ function add_friend_request_to_database(User, me, friend) {
       return ;
     }
     user.friend_request.push(me);
-    console.log(user.friend_request);
+    console.log("friend_request", user.friend_request);
     User.updateOne({
       _id : user._id
     }, { 

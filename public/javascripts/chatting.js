@@ -22,7 +22,9 @@ sendMessage.addEventListener('click', function (e) {
     receiver : currentTalk.innerText.trim()
   }
   socket.emit('message', Message);
-  conversation.innerHTML += displayMessage('sender', message, "sun");
+  let date = new Date();
+  let time = date.getDate() + "/" + date.getDay() + "/" + date.getFullYear()
+  conversation.innerHTML += displayMessage('sender', message, time);
   conversation.scrollTop = conversation.scrollHeight;
   messageInput.value = '';
   messageInput.focus();
