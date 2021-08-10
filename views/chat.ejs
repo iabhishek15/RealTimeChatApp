@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Whatsapp web chat template - Bootdey.com</title>
+    <title>RealTimeChatting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel = 'stylesheet' href = 'stylesheets/chat.css' />
@@ -83,7 +83,7 @@
         </div>
         <div class="col-sm-1 col-xs-1  heading-dot pull-right">
           <form action = '/logout?_method=DELETE' method = 'POST'>
-            <button type = 'submit' class = 'btn'>
+            <button type = 'submit'>
               <i class="fa fa-sign-out fa-2x  pull-right" id = 'signout' aria-hidden="true"></i>
             </button>
           </form>
@@ -170,8 +170,19 @@
         <h3>Friend Request Pending !!</h3>
         <div class="container bootstrap snippets bootdey" id = "friendList">
         <div class="jumbotron list-content">
-          <ul class="list-group">
-            <li href="#" class="list-group-item text-left" class="ul_list">
+          <ul class="list-group" id = "ul_ul">
+            <li href="#" class="list-group-item text-left  ul_list">
+              <img id = "friend_img" class="img-thumbnail" src="https://bootdey.com/img/Content/User_for_snippets.png">
+              <label class="name">
+                  Juan guillermo cuadrado<br>
+              </label>
+              <label class="pull-right">
+                  <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
+                  <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
+              </label>
+              <div class="break"></div>
+            </li>
+            <li href="#" class=" ul_list  list-group-item text-left">
               <img class="img-thumbnail" src="https://bootdey.com/img/Content/User_for_snippets.png">
               <label class="name">
                   Juan guillermo cuadrado<br>
@@ -190,75 +201,83 @@
   </div>
 </div>
 
-
-<style>
-.list-content{
- min-height:100px;
-}
-#friendList{
-  width:100%;
-  height:80%;
-  background-color: white;
-}
-.list-group-item img {
-    height:80px; 
-    width:80px;
-}
-
-.jumbotron .btn {
-    padding: 5px 5px !important;
-    font-size: 12px !important;
-}
-.prj-name {
-    color:#5bc0de;    
-}
-.break{
-    width:100%;
-    margin:20px;
-}
-.name {
-    color:#5bc0de;    
-}
-  #checking {
-    background-color:red;
-  }
-  #chatMessage {
-    outline: none;
-    box-shadow: none;
-  }
-  .btn.focus, .btn:focus {
-    outline: 0;
-    box-shadow: none!important; 
-  }
-  #myModal, #imageModel{
-    height:50%;
-  }
-  #FriendRequest {
-    height: 80%;
-  }
-  .modal-body {
-    visibility: visible;
-  }
-  .badge {
-  position: absolute;
-  top: 0px;
-  right: -1px;
-  padding: 1px 1px;
-  border-radius: 50%;
-  background-color: red;
-  height:40%;
-  width: 40%;
-  color: white;
-}
-
-.ul_list{
-  height:40%;
-}
-</style>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src = "/socket.io/socket.io.js"></script>
 <script src = 'javascripts/chatting.js'></script>
+
+<style>
+  button {
+    border:none;
+  }
+  .list-content{
+   min-height:100px;
+  }
+  #friendList{
+    width:100%;
+    height:80%;
+    background-color: white;
+  }
+  .list-group-item img {
+      height:80px; 
+      width:80px;
+  }
+  
+  .jumbotron .btn {
+      padding: 5px 5px !important;
+      font-size: 12px !important;
+  }
+  .prj-name {
+      color:#5bc0de;    
+  }
+  .break{
+      width:100%;
+      margin:20px;
+  }
+  .name {
+      color:#5bc0de;    
+  }
+    #checking {
+      background-color:red;
+    }
+    #chatMessage {
+      outline: none;
+      box-shadow: none;
+    }
+    .btn.focus, .btn:focus {
+      outline: 0;
+      box-shadow: none!important; 
+    }
+    #myModal, #imageModel{
+      height:50%;
+    }
+    #FriendRequest {
+      height: 80%;
+    }
+    .modal-body {
+      visibility: visible;
+    }
+    .badge {
+    position: absolute;
+    top: 0px;
+    right: -1px;
+    padding: 1px 1px;
+    border-radius: 50%;
+    background-color: red;
+    height:40%;
+    width: 40%;
+    color: white;
+  }
+  .ul_list{
+    background-color: red;
+    margin-top:10px;
+    height:5%;
+    padding:0px;
+  }
+  #friend_img{
+    height:20%;
+  }
+</style>
 </body>
 </html>
 

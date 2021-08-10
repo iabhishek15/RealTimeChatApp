@@ -47,11 +47,10 @@ searchFriend.addEventListener("keydown", function (e) {
 //checking if the friend exits or not
 socket.on('FriendExists', exits => { 
   if (exits) {
-    showSearch.innerHTML = `
-    <p>the username does exits<p>
+    showSearch.innerHTML = `<br><br>
     <button class = 'btn btn-primary' id = 'friendRequest' onclick = 'addFriend()'>Send Friend Request</button>`;
   }else {
-    showSearch.innerHTML = 'no such user exits';
+    showSearch.innerHTML = '<br><br>No such user exits';
   }
 });
 
@@ -68,15 +67,7 @@ function addFriend() {
 }
 
 socket.on('AddFriendRequest', user => {
-  console.log(username.trim(), user.receiver);
-  if(username.trim() == user.receiver) {
-    if (confirm(`Do you want to be friend with ${user.sender} ??`)) {
-      socket.emit('AddFriend', {
-        user1 : user.sender,
-        user2 : user.receiver
-      });
-    }
- }
+  //here we will add the friend request in real time to the div element
 });
 
 

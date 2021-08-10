@@ -156,7 +156,7 @@ function updateMessage(Message, id, texts) {
   });
 }
 
-
+//adding the friend request to database
 function add_friend_request_to_database(User, me, friend) {
   User.findOne({
     username : friend
@@ -166,12 +166,12 @@ function add_friend_request_to_database(User, me, friend) {
       return ;
     }
     user.friend_request.push(me);
-    //console.log(user.friends);
+    console.log(user.friend_request);
     User.updateOne({
       _id : user._id
     }, { 
       $set : { 
-        friends : user.friend_request 
+        friend_request : user.friend_request 
       }
     }, {
       "upsert": false
