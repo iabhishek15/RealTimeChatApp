@@ -4,7 +4,7 @@
 
 <b>Purpose</b>: providing the facility for two individuals to chat in real-time.
 
-Front is build using - HTML, CSS, js</br>
+Front is build using - HTML, CSS, Bootstrap, js</br>
 Backend is build using - Node, Express</br>
 Database - MongoDB</br>
 Real-Time chatting - socket.io</br>
