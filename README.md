@@ -1,6 +1,22 @@
 # chatApp
 
-This is a chatting Application which is made in nodejs, express and mongodb
+<h3>Real-Time Chat App using MEN(Mongo Express Node).</h3>
+
+<b>Purpose</b>: providing the facility for two individuals to chat in real-time.
+
+Front is build using - HTML, CSS, js</br>
+Backend is build using - Node, Express</br>
+Database - MongoDB</br>
+Real-Time chatting - socket.io</br>
+
+Some of the features of my Web Chat App is -:</br>
+login/signup - for using this web app user has to create an account.</br>
+Profile image upload - user can change their profile image.</br>
+Sending friend requests - you can add your friends by sending a friend request.</br>
+
+This project is still in progress.
+
+
 
 Demo Video of the Project - https://drive.google.com/file/d/1Nu_C8a0GPdotMr_yyyqDqhIoe4DLqqyR/view?usp=sharing
 
