@@ -119,8 +119,6 @@ function AddFriend(User, user1, user2) {
         return;
       }
       user.friends.push(user2);
-      //printing the user.friends
-      console.log(user.friends);
       User.updateOne(
         {
           _id: user._id,

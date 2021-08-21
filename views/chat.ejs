@@ -17,9 +17,6 @@
   <div class="row app-one">
     <div class="col-sm-4 side">
       <div class="side-one" id = 'users'>
-        <!-- <form action = '/logout?_method=DELETE' method = 'POST'>
-          <input type = 'submit' class = 'btn' value = 'logout'>
-        </form> -->
         <div class="row heading">
           <div class="col-sm-3 col-xs-3 heading-avatar" data-toggle="modal" data-target="#imageModel">
             <div class="heading-avatar-icon">
@@ -49,6 +46,7 @@
             <div class="col-sm-3 col-xs-3 sideBar-avatar">
               <div class="avatar-icon">
                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                <!-- <img src="<%= friend.image %>"> -->
               </div>
             </div>
             <div class="col-sm-9 col-xs-9 sideBar-main">
@@ -172,26 +170,18 @@
         <div class="container bootstrap snippets bootdey" id = "friendList">
         <div class="jumbotron list-content">
           <ul class="list-group" id = "ul_ul">
-            <li href="#" class="list-group-item text-left  ul_list">
-              <img id = "friend_img" class="img-thumbnail" src="https://bootdey.com/img/Content/User_for_snippets.png">
-              <label class="name">
-                  Juan guillermo cuadrado<br>
-              </label>
-              <label class="pull-right">
-                  <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
-                  <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
-              </label>
-            </li>
-            <li href="#" class="list-group-item text-left ul_list">
-              <img class="img-thumbnail" src="https://bootdey.com/img/Content/User_for_snippets.png">
-              <label class="name">
-                  Juan guillermo cuadrado<br>
-              </label>
-              <label class="pull-right">
-                  <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
-                  <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
-              </label>
-            </li>
+            <% friendRequest.map((request) => { %> 
+              <li href="#" class="list-group-item text-left ul_list">
+                <img class="img-thumbnail" src="<%= request.image %>">
+                <label class="name">
+                    <%= request.friend %><br>
+                </label>
+                <label class="pull-right">
+                    <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
+                    <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
+                </label>
+              </li>
+            <% }); %>
           </ul>
         </div>
         </div>

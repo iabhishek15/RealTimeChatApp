@@ -83,27 +83,12 @@ app.get("/", IsAuthenticated, function (req, res, next) {
       if (err) {
         return next(err);
       }
-      let userFriendRequest = [];
-      for (let i = 0; i < user.friend_request.length; ++i) {
-        const newUser = User.findOne({
-          username: user.friend_request[i],
-        });
-        //console.log(newUser.user);
-        userFriendRequest.push({
-          user: user.username,
-          image: newUser.image,
-        });
-        console.log("user friend request", userFriendRequest);
-      }
-      console.log(
-        `friend request recieved by ${req.user.username} is`,
-        userFriendRequest
-      );
+      //console.log(user.friend_request);
       return res.render("chat", {
         username: req.user.username,
         friends: user.friends,
+        friendRequest: user.friend_request,
         profileImage: user.image,
-        userFriendRequest: userFriendRequest,
       });
     }
   );
