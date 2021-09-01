@@ -23,5 +23,21 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "socket.io": "^4.0.1"
-  }
+  },
+  "engines": {
+  "node": "14.16.1"
+  },
+  "description": "<h3>Real-Time Chat App using MEN(Mongo Express Node).</h3>",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iabhishek15/chatApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iabhishek15/chatApp/issues"
+  },
+  "homepage": "https://github.com/iabhishek15/chatApp#readme"
 }

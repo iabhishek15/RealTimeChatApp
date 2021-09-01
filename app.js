@@ -10,6 +10,9 @@ var methodOverride = require("method-override");
 var flash = require("express-flash");
 const multer = require("multer");
 const helpers = require("./helpers");
+const uri = process.env.MONGODB_URI;
+
+
 
 //const upload = multer({dest: __dirname + '/uploads/images'});
 const storage = multer.diskStorage({
