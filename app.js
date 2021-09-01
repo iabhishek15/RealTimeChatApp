@@ -10,9 +10,8 @@ var methodOverride = require("method-override");
 var flash = require("express-flash");
 const multer = require("multer");
 const helpers = require("./helpers");
+
 const uri = process.env.MONGODB_URI;
-
-
 
 //const upload = multer({dest: __dirname + '/uploads/images'});
 const storage = multer.diskStorage({
@@ -30,7 +29,7 @@ const storage = multer.diskStorage({
 });
 
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/chattingdb", {
+mongoose.connect(uri || "mongodb://localhost:27017/chattingdb", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -71,6 +70,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
 app.use("/uploads", express.static("uploads"));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 app.delete("/logout", function (req, res, next) {
   req.logOut();
