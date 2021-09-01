@@ -40,7 +40,7 @@
           </div>
         </div>
       
-      <div class="row sideBar">
+      <div class="row sideBar" id = "AddFriend">
         <% friends.map((friend) => { %> 
           <div class="row sideBar-body" onclick = "chatNow('<%= friend %>')">
             <div class="col-sm-3 col-xs-3 sideBar-avatar">
@@ -52,7 +52,7 @@
             <div class="col-sm-9 col-xs-9 sideBar-main">
               <div class="row">
                 <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta"><%= friend %>
+                  <span class = "friends" class="name-meta"><%= friend %>
                 </span>
                 </div>
                 <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
@@ -97,7 +97,7 @@
       <div class="row message" id="conversation">  
       </div>
 
-      <div class="row reply">
+      <div class="row reply" id = "messageArea">
         <div class="col-sm-9 col-xs-9 reply-main" id = 'showTextDiv'>
           <textarea class="form-control" id = 'messageInput' rows="1" id="comment"></textarea>
         </div>
@@ -168,17 +168,17 @@
       <div class="modal-header" tabindex="1">
         <h3>Friend Request Pending !!</h3>
         <div class="container bootstrap snippets bootdey" id = "friendList">
-        <div class="jumbotron list-content">
+        <div class="jumbotron list-content" id = "friendRequestNotification">
           <ul class="list-group" id = "ul_ul">
             <% friendRequest.map((request) => { %> 
-              <li href="#" class="list-group-item text-left ul_list">
+              <li href="#" class="list-group-item text-left ul_list" id = "<%= request.friend %>">
                 <img class="img-thumbnail" src="<%= request.image %>">
                 <label class="name">
                     <%= request.friend %><br>
                 </label>
                 <label class="pull-right">
-                    <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
-                    <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
+                    <button class="btn btn-success btn-xs glyphicon glyphicon-ok"  title="View" onclick = "acceptFriendRequest('<%= request.friend %>')"></button>
+                    <button  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" title="Delete" onclick = "removeFriendRequest('<%= request.friend %>')"></button>
                 </label>
               </li>
             <% }); %>
@@ -208,8 +208,8 @@
     background-color: white;
   }
   .list-group-item img {
-      height:80px; 
-      width:80px;
+    height:80px; 
+    width:80px;
   }
   
   .jumbotron .btn {
@@ -217,36 +217,32 @@
       font-size: 12px !important;
   }
   .prj-name {
-      color:#5bc0de;    
+    color:#5bc0de;    
   }
   .break{
-      width:100%;
-      margin:20px;
+    width:100%;
+    margin:20px;
   }
   .name {
-      color:#5bc0de;    
+    color:#5bc0de;    
   }
-    #checking {
-      background-color:red;
-    }
-    #chatMessage {
-      outline: none;
-      box-shadow: none;
-    }
-    .btn.focus, .btn:focus {
-      outline: 0;
-      box-shadow: none!important; 
-    }
-    #myModal, #imageModel{
-      height:50%;
-    }
-    #FriendRequest {
-      height: 80%;
-    }
-    .modal-body {
-      visibility: visible;
-    }
-    .badge {
+  #checking {
+    background-color:red;
+  }
+  .btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: none!important; 
+  }
+  #myModal, #imageModel{
+    height:50%;
+  }
+  #FriendRequest {
+    height: 80%;
+  }
+  .modal-body {
+    visibility: visible;
+  }
+  .badge {
     position: absolute;
     top: 0px;
     right: -1px;
@@ -264,6 +260,13 @@
   }
   #friend_img{
     height:20%;
+  }
+  #friendRequestNotification{
+    overflow: scroll;
+  }
+  #messageArea{
+    /* height:100px;
+    margin-bottom:100px; */
   }
 </style>
 </body>

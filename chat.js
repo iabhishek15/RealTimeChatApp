@@ -6,7 +6,38 @@ function chatting(server) {
   const Message = mongoose.model("Message");
 
   io.on("connection", (socket) => {
-    console.log("A user has been connected");
+    //console.log("A user has been connected");
+
+    socket.on("removeFriendRequest", function (data) {
+      removeFriendRequest(User, data.user, data.friend);
+    });
+
+    socket.on("acceptFriendRequest", function (data) {
+      AddFriend(User, data.user, data.friend);
+      AddFriend(User, data.user, data.friend);
+    });
+
+    socket.on("doesFriendRequestExist", function (data) {
+      User.findOne(
+        {
+          username: data.friend,
+        },
+        function (err, user) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          const friendRequest = user.friend_request;
+          let res = false;
+          friendRequest.forEach((request) => {
+            if (request.friend === data.user) {
+              res = true;
+            }
+          });
+          return socket.emit("friendRequestExits", res);
+        }
+      );
+    });
 
     socket.on("message", function (message) {
       //console.log(message);
@@ -74,10 +105,10 @@ function chatting(server) {
       });
     });
 
-    socket.on("AddFriend", (user) => {
-      AddFriend(User, user.user1, user.user2);
-      AddFriend(User, user.user2, user.user1);
-    });
+    // socket.on("AddFriend", (user) => {
+    //   AddFriend(User, user.user1, user.user2);
+    //   AddFriend(User, user.user2, user.user1);
+    // });
 
     socket.on("friendTalkHistory", (user) => {
       var personOne = user.user1;
@@ -86,7 +117,7 @@ function chatting(server) {
         personTwo = user.user1;
         personOne = user.user2;
       }
-      console.log(personOne, personTwo);
+      //console.log(personOne, personTwo);
       Message.findOne(
         {
           personOne: personOne,
@@ -226,6 +257,45 @@ function add_friend_request_to_database(User, me, friend) {
             });
         }
       );
+    }
+  );
+}
+
+function removeFriendRequest(User, me, friend) {
+  User.findOne(
+    {
+      username: me,
+    },
+    function (err, user) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      let newFriendRequest = [];
+      user.friend_request.forEach((data) => {
+        if (data.friend !== friend) {
+          newFriendRequest.push(data);
+        }
+      });
+      User.updateOne(
+        {
+          _id: user._id,
+        },
+        {
+          $set: {
+            friend_request: newFriendRequest,
+          },
+        },
+        {
+          upsert: false,
+        }
+      )
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   );
 }
