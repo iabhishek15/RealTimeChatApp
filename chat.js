@@ -14,7 +14,8 @@ function chatting(server) {
 
     socket.on("acceptFriendRequest", function (data) {
       AddFriend(User, data.user, data.friend);
-      AddFriend(User, data.user, data.friend);
+      AddFriend(User, data.friend, data.user);
+      removeFriendRequest(User, data.user, data.friend);
     });
 
     socket.on("doesFriendRequestExist", function (data) {
