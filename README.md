@@ -1,6 +1,6 @@
 # chatApp
 
-Website - https://real-time-chat-using-node.herokuapp.com
+Website - https://real-time-chat-using-node.herokuapp.com (website down due to free plan expire)
 
 <h3>Real-Time Chat App using MEN(Mongo Express Node).</h3>
 
